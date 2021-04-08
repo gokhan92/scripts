@@ -8,24 +8,27 @@ command="service sssd status"
 listUrl=["http://server1:port","http://server2:port","http://server3:port","http://server4:port","http://server5:port"]
 
 
-try:
-    for i in listURL:
+for i in listURL:
+    try:
         resp=urllib.request.urlopen(i).getcode()
     
         if resp == 200:
             print(i+" Server status "+str(resp))
             ssh = subprocess.Popen(["ssh", "%s" % i, command],
-                       shell=False,
-                       stdout=subprocess.PIPE,
-                       stderr=subprocess.PIPE)
+                    shell=False,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE)
             result = ssh.stdout.readlines()
             if result == []:
                 error = ssh.stderr.readlines()
                 print (sys.stderr, "ERROR: %s" % error)
             else:
                 print (result)
-except:
+    except:
+        
         print("An error occurred in the server " + i + " Please check it")
+
+   
     
     
         
