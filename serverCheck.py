@@ -11,7 +11,7 @@ listUrl=["http://server1:port","http://server2:port","http://server3:port","http
 for i in listURL:
     try:
         resp=urllib.request.urlopen(i).getcode()
-    
+
         if resp == 200:
             print(i+" Server status "+str(resp))
             ssh = subprocess.Popen(["ssh", "%s" % i, command],
@@ -25,13 +25,13 @@ for i in listURL:
             else:
                 print (result)
     except:
-        
+
         print("An error occurred in the server " + i + " Please check it")
 
-   
-    
-    
-        
+  #check the error 
+
+
+
 #You can add following ssh connection to run the remote commands in the if else control flow
 """
 ssh = subprocess.Popen(["ssh", "%s" % i, COMMAND],
